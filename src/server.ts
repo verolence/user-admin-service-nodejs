@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 });
 
 const startServer = async () => {
-  await connectDB(); // <-- сначала подключаем БД
+  await connectDB();
   app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
   });
