@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/verolence/user-admin-service-nodejs#readme",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.3",
     "@types/mongoose": "^5.11.96",
     "@types/node": "^24.5.2",
@@ -28,6 +29,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "express": "^5.1.0",
     "mongoose": "^8.18.2"
   }
