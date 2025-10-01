@@ -30,3 +30,5 @@ Invoke-WebRequest -Uri http://localhost:3000/api/auth/register `
 -Body '{ "fullName": "Анастасия Иванова", "birthDate": "2003-04-04", "email": "anastacy@example.com", "password": "password123", "role": "user" }'
 
 ```
+
+### Логин пользователя (авторизация)
