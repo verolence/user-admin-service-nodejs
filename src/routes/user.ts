@@ -1,15 +1,22 @@
 import express from 'express';
 import { User } from '../models/User';
-
+import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
 // данные пользователя по ID
 // (req, res) => {} - функция-обработчик
-
-router.get('/:id', async (req, res) => {
+// authMiddleware - middleware функция, которая выполняется до обработчика, она вызывает next(), либо возвращает ошибку
+router.get('/:id', authMiddleware, async (req, res) => {
   try {
+    const currentUser = (req as any).user;
+
     const userId = req.params.id;
+
+    if (currentUser?.userId !== userId && currentUser?.role !== 'admin') {
+      return res.status(403).json({ message: 'Доступ запрещен' });
+    }
+
     const user = await User.findById(userId).select('-password');
     if (!user) return res.status(404).json({ message: 'Пользователь не найден' });
 
@@ -21,8 +28,14 @@ router.get('/:id', async (req, res) => {
 });
 
 // список всех пользователей
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
   try {
+    const currentUser = (req as any).user;
+
+    if (currentUser?.role !== 'admin') {
+      return res.status(403).json({ message: 'Доступ запрещен' });
+    }
+
     const users = await User.find().select('-password'); // не возвращаем пароль
     res.json(users);
   } catch (err) {
