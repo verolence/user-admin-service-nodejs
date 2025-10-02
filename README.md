@@ -9,7 +9,33 @@
 - Express — веб-фреймворк для создания серверных маршрутов и API,
 - JWT (jsonwebtoken) — для авторизации пользователей через токены
 
-## Примеры запросов
+## Инструкция по запуску
+1. Установить зависимости:
+   ```bash
+   npm install
+   ```
+2. Заполнить .env файл:
+   ```
+   MONGO_URI=mongodb://127.0.0.1:27017/user-admin-db
+   JWT_SECRET=your_secret_key
+   ```
+3. Запустить сервер:
+   ```bash
+   npm run dev
+   ```
+
+## Эндпоинты
+POST /api/auth/register — регистрация
+
+POST /api/auth/login — авторизация, возвращает JWT
+
+GET /api/users/:id — получить пользователя по id (админ или сам пользователь)
+
+GET /api/users — список пользователей (только админ)
+
+POST /api/users/:id/block — блокировка (админ или сам пользователь)
+
+## Пример запроса
 
 ### Создание пользователя
 ```
@@ -30,4 +56,3 @@ Invoke-WebRequest -Uri http://localhost:3000/api/auth/register `
 -Body '{ "fullName": "Анастасия Иванова", "birthDate": "2003-04-04", "email": "anastacy@example.com", "password": "password123", "role": "user" }'
 
 ```
-### Логин пользователя (авторизация)
